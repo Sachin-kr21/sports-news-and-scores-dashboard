@@ -13,7 +13,7 @@ const SignupForm: React.FC = () => {
     password  : string
   };
   const navigate = useNavigate();
-  const {register ,  handleSubmit, formState: { errors } } = useForm<Inputs>();
+  const {register ,  handleSubmit } = useForm<Inputs>();
 
 
   const onSubmit : SubmitHandler<Inputs> = async (data) => {

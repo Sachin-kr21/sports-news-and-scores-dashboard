@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from 'react';
+import React from 'react';
 // Dialogue 1: First we will import the API_ENDPOINT constant from the `config` folder
 import { API_ENDPOINT } from '../config/constants';
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -13,7 +13,7 @@ const SigninForm: React.FC = () => {
     password : string
   };
   const navigate = useNavigate();
-  const { register , handleSubmit, formState: { errors } } = useForm<Inputs>();
+  const { register , handleSubmit } = useForm<Inputs>();
 
   // Dialogue 2: Then we will define the handle submit function
   const onSubmit : SubmitHandler<Inputs> = async (data) => {
