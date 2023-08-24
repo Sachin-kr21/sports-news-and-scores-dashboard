@@ -1,9 +1,9 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 import Notfound from "../Notfound";
 import Dashboard from "../dashboard";
-import Signin from "../signin";
-import Signup from "../signup";
-import Logout from "../logout";
+import Signin from "../signin/index";
+import Signup from "../signup/index";
+import Logout from "../logout/index";
 
 
 const router = createBrowserRouter([
