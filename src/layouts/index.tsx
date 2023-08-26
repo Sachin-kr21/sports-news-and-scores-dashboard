@@ -2,6 +2,9 @@
 import {Fragment} from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { UserCircleIcon } from '@heroicons/react/24/outline'
+// import SettingsIcon from './settingsIcon';
+// import PreferencesIcon from './preferencesIcon';
+import PreferencesModal from '../preferences/preferencesModal';
 
 
 const Appbar = () => {
@@ -19,17 +22,26 @@ const classNames = (...classes: string[]): string => classes.filter(Boolean).joi
     <>
     
 <nav className="bg-grey border-gray-200 dark:bg-gray-900 w-full">
-    <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
+    <div className="flex  items-center justify-between mx-auto max-w-screen-xl p-4">
         <a href="/" className="flex items-center">
             <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="Flowbite Logo" />
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Sports Centre</span>
         </a>
+        <div className="flex items-center">
+        {auth && (
+    <PreferencesModal/>
+  )}
         {!auth &&
         <div className="flex items-center">
             <a href="/signin" className="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Login</a>
         </div>
         }
         {auth &&
+        <div>
+
+
+
+        
 <Menu as="div" className="relative ml-3">
                     <div>
                       <Menu.Button className="rounded-full bg-white p-1 text-gray-400 hover:text-blue-600">
@@ -64,8 +76,10 @@ const classNames = (...classes: string[]): string => classes.filter(Boolean).joi
                       </Menu.Items>
                     </Transition>
                   </Menu>
+                  </div>
 
-        }
+}
+</div>
     </div>
 </nav>
 </>

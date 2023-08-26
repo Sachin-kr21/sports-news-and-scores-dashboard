@@ -37,7 +37,7 @@ const SigninForm: React.FC = () => {
       console.log(data);
       localStorage.setItem('authToken',data.auth_token);
       localStorage.setItem('userData', JSON.stringify(data.user));
-      
+      localStorage.setItem('userPreferences' , JSON.stringify(data.user.preferences))
       try {
         // ...
         // ...
