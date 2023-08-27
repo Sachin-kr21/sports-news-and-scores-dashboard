@@ -12,15 +12,14 @@ async function fetchSports() {
     }
 
     const data = await response.json();
-    return data.sports; // Assuming the response structure has a 'sports' field
+    return data.sports; 
 
   } catch (error) {
     console.error('Fetching sports failed:', error);
-    return []; // Return an empty array in case of an error
+    return []; 
   }
 }
 
-// You can call the fetchSports function and populate the sportsData array later
 export const sportsData: Sport[] = [];
 
 async function populateSportsData() {
@@ -28,7 +27,6 @@ async function populateSportsData() {
   sportsData.push(...fetchedSports);
 }
 
-// Call the function to populate sportsData
 populateSportsData();
 
 async function fetchTeams() {
@@ -44,11 +42,11 @@ async function fetchTeams() {
 
     const data = await response.json();
     // console.log("teams",data);
-    return data; // Assuming the response structure has a 'sports' field
+    return data;
 
   } catch (error) {
     console.error('Fetching sports failed:', error);
-    return []; // Return an empty array in case of an error
+    return [];
   }
 }
   
