@@ -1,3 +1,4 @@
+import Articles from "../articles";
 import Appbar from "../layouts";
 import Matches from "../matches";
 
@@ -13,6 +14,7 @@ const Dashboard: React.FC = () => {
       <div >
         <Matches />
       </div>
+        <Articles />
       </div>
     );
   }
