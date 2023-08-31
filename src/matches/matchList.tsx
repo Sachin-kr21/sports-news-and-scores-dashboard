@@ -36,6 +36,8 @@ const MatchList: React.FC = () => {
       );
 
       setMatchData(updatedMatches);
+      console.log("Match Updated");
+      
     } catch (error) {
       console.error("Match data fetching failed: ", error);
     }
@@ -53,12 +55,21 @@ const MatchList: React.FC = () => {
       }
 
       const matches = await response.json();
-
+      console.log("All Matches Fetched");
+      
       if(auth){ 
       const pref = localStorage.getItem("userPreferences") || "";
-
-      const filteredEvents = filterEvents(matches.matches , pref);
-      setMatchData(filteredEvents );
+        if(pref.length==2){
+      setMatchData(matches.matches);
+        }
+        else{
+          const filteredEvents = filterEvents(matches.matches , pref);
+          console.log("filterEvents",filterEvents);
+          
+          setMatchData(filteredEvents );
+        }
+      
+      
       }
       else{
         setMatchData(matches.matches);

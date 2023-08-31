@@ -37,7 +37,7 @@ const PreferencesPage: React.FC<PreferencesPageProps> = ({ closeModal }) => {
       },
     };
     // const auth = localStorage.getItem("authToken")
-    console.log("Selected Data:", JSON.stringify(selectedData, null, 2));
+    // console.log("Selected Data:", JSON.stringify(selectedData, null, 2));
 
     const token = localStorage.getItem("authToken") ?? "";
     try {

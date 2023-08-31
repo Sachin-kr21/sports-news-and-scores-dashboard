@@ -22,6 +22,8 @@ const ArticleContent: React.FC<ArticleDetailsProps> = ({ articleId }) => {
     
           const article = await response.json();
           // console.log("article",article.content);
+      console.log("Article Content Fetched");
+
           setArticleContent(article.content);
         } catch (error) {
           console.error("Matches fetching failed: ", error);

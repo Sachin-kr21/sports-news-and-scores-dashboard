@@ -37,7 +37,7 @@ const ArticleList: React.FC = () => {
       }
 
       const articles = await response.json();
-      console.log(articles);
+      console.log("All Articles Fetched");
       setarticlesData(articles);
     } catch (error) {
       console.error("Matches fetching failed: ", error);

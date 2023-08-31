@@ -34,7 +34,7 @@ const SigninForm: React.FC = () => {
       // navigate("/dashboard");
       // src/pages/signin/SigninForm.tsx
       const data = await response.json()
-      console.log(data);
+      // console.log(data);
       localStorage.setItem('authToken',data.auth_token);
       localStorage.setItem('userData', JSON.stringify(data.user));
       localStorage.setItem('userPreferences' , JSON.stringify(data.user.preferences))
