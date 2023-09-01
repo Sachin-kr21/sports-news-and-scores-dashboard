@@ -57,9 +57,13 @@ const MatchList: React.FC = () => {
       const matches = await response.json();
       console.log("All Matches Fetched");
       
+      
       if(auth){ 
       const pref = localStorage.getItem("userPreferences") || "";
-        if(pref.length==2){
+      // const prefJSON = JSON.parse(pref)
+
+        if(pref.length==2 || pref.length==43){
+          
       setMatchData(matches.matches);
         }
         else{
