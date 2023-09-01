@@ -9,10 +9,10 @@ function App() {
   
 
   return (
-    <>
+    <div className="bg-blue-100">
             <RouterProvider router={router} />
       
-    </>
+    </div>
   )
 }
 

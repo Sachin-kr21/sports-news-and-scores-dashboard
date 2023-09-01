@@ -14,8 +14,13 @@ const Dashboard: React.FC = () => {
       <div >
         <Matches />
       </div>
-        <Articles />
+      <div style={{ display: "flex" }}> {/* Use flexbox for layout */}
+        <div>
+          <Articles />
+        </div>
+        
       </div>
+    </div>        
     );
   }
 
