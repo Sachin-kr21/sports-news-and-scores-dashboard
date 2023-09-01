@@ -98,9 +98,9 @@ const MatchList: React.FC = () => {
   useEffect(() => {
     fetchAllMatches();
   }, []);
-
+  // border-gray-200 dark:bg-gray-900
   return (
-    <div className="flex items-center  bg-grey border-gray-200 dark:bg-gray-900 w-full">
+    <div className="flex items-center bg-blue-100 w-full">
       <div className="flex items-center justify-start max-w-screen-xl p-4">
         <div className="flex flex-nowrap overflow-x-scroll p-4">
           {matchData.map((match) => (

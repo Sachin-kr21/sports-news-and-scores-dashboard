@@ -20,8 +20,8 @@ const classNames = (...classes: string[]): string => classes.filter(Boolean).joi
 
   return (
     <>
-    
-<nav className="bg-grey border-gray-200 dark:bg-gray-900 w-full">
+     {/* border-gray-200 dark:bg-gray-900 */}
+<nav className=" w-full bg-blue-100">
     <div className="flex  items-center justify-between max-w-screen-xl p-4">
         <a href="/" className="flex items-center">
             <img src='../sports tracker logo.svg' className="h-12 mr-3" alt="Sports Tracker" />
