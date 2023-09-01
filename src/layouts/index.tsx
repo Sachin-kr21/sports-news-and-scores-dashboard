@@ -24,8 +24,8 @@ const classNames = (...classes: string[]): string => classes.filter(Boolean).joi
 <nav className="bg-grey border-gray-200 dark:bg-gray-900 w-full">
     <div className="flex  items-center justify-between max-w-screen-xl p-4">
         <a href="/" className="flex items-center">
-            <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="Sports Centre" />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Sports Centre</span>
+            <img src='../sports tracker logo.svg' className="h-12 mr-3" alt="Sports Tracker" />
+            {/* <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Sports Tracker</span> */}
         </a>
         <div className="flex items-center">
         {auth && (
