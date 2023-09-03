@@ -55,9 +55,9 @@ const ArticleList: React.FC = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-4 w-9/12 p-3">
+      <div className="flex flex-col gap-4 w-9/12 p-3 ">
         {articles.map((article) => (
-          <div key={article.id} className="border rounded p-4  flex pb-10">
+          <div key={article.id} className="border rounded p-4  flex pb-10 ">
             <img
               src={article.thumbnail}
               alt="Article Thumbnail"
