@@ -22,7 +22,7 @@ const classNames = (...classes: string[]): string => classes.filter(Boolean).joi
     <>
      {/* border-gray-200 dark:bg-gray-900 */}
 <nav className=" w-full bg-blue-400 rounded-lg">
-    <div className="flex  items-center justify-between max-w-screen-xl p-4">
+    <div className="flex  items-center justify-between max-w-screen p-4 pr-20">
         <a href="/" className="flex items-center">
             {/* <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Dashboard</span> */}
             <img src='../sports tracker logo.svg' className="h-12 mr-3 pl-10" alt="Sports Tracker" />
@@ -34,7 +34,7 @@ const classNames = (...classes: string[]): string => classes.filter(Boolean).joi
   )}
         {!auth &&
         <div className="flex items-center">
-            <a href="/signin" className="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Login</a>
+            <a href="/signin" className="text-sm  text-blue-600 dark:text-blue-100 hover:underline">Login</a>
         </div>
         }
         {auth &&
@@ -43,7 +43,7 @@ const classNames = (...classes: string[]): string => classes.filter(Boolean).joi
 
 
         
-<Menu as="div" className="relative ml-3 pr-10">
+<Menu as="div" className="relative ml-3 ">
                     <div>
                       <Menu.Button className="rounded-full bg-green-200 p-1 text-gray-400 hover:text-blue-600">
                         <UserCircleIcon className="h-6 w-6" aria-hidden="true" />

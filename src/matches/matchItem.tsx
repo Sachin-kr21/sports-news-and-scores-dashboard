@@ -15,15 +15,16 @@ interface Match {
 
 interface MatchItemProps {
   match: Match;
-
+  isRunning : boolean;
 }
 
 
 
-const MatchItem: React.FC<MatchItemProps> = ({ match }) => {
+const MatchItem: React.FC<MatchItemProps> = ({ match , isRunning}) => {
 
   const [matchData, setMatchData] = useState<Match>(match);
 
+  
     const fetchMatchData = async () => {
         try {
           const response = await fetch(`${API_ENDPOINT}/matches/${matchData.id}`, {
@@ -62,6 +63,7 @@ const MatchItem: React.FC<MatchItemProps> = ({ match }) => {
       style={{ width: "50%", minWidth: "200px", maxWidth: "400px" }}
     >
       <div className="absolute top-2 right-2">
+        {isRunning &&
       <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -76,7 +78,7 @@ const MatchItem: React.FC<MatchItemProps> = ({ match }) => {
                     strokeLinejoin="round"
                     d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
                   />
-                </svg>
+                </svg>}
       </div>
       <h3 className="font-semibold text-sm mb-1">{matchData.sportName}</h3>
       <p className="text-gray-600 text-xs mb-2">{matchData.location}</p>

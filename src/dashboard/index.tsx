@@ -3,21 +3,22 @@ import Appbar from "../layouts";
 import Matches from "../matches";
 
 const Dashboard: React.FC = () => {
-    // Dialogue 2: And use it after the h2 tag
     return (
-      <div className="pl-20 pr-40">
+      <div className="">
       
       <div >
           <Appbar/>
           
       </div>
-      <div >
-        <Matches />
+      <div className="pl-10">
+        <Matches  />
       </div>
-      <div style={{ display: "flex" }}> {/* Use flexbox for layout */}
+      <div className="flex pl-10"> 
         <div>
           <Articles />
+
         </div>
+          
         
       </div>
     </div>        

@@ -55,29 +55,37 @@ const ArticleList: React.FC = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-4 w-9/12 p-3 ">
-        {articles.map((article) => (
-          <div key={article.id} className="border rounded p-4  flex pb-10 ">
-            <img
-              src={article.thumbnail}
-              alt="Article Thumbnail"
-              className="h-20 rounded mr-4"
-            />
-             <div className="absolute pl-40 w-4/6 ">
-            <h2 className="text-lg font-semibold  ">{article.title}</h2>
-            <p className="text-sm text-gray-600 w-9/10 ">{article.summary}</p>
-            <div className="flex justify-between ">
-              <div className="text-gray-500">{formatDate(article.date)}</div>
-              <button
-                className="text-blue-500 cursor-pointer pb-5"
-                onClick={() => setSelectedArticle(article)}
-              >
-                Read More
-              </button>
+      <div className="flex flex-row w-full">
+        <div className="flex flex-col gap-4 w-8/12 p-3">
+          {articles.map((article) => (
+            <div key={article.id} className="border rounded p-4 flex">
+              <div className="w-36 flex justify-center items-center">
+                <img
+                  src={article.thumbnail}
+                  alt="Article Thumbnail"
+                  className="h-20 rounded mr-4"
+                />
+              </div>
+              <div className="w-5/6">
+                <h2 className="text-lg font-semibold">{article.title}</h2>
+                <p className="text-sm text-gray-600 w-9/10">{article.summary}</p>
+                <div className="flex justify-between">
+                  <div className="text-gray-500">{formatDate(article.date)}</div>
+                  <button
+                    className="text-blue-500 cursor-pointer pb-5"
+                    onClick={() => setSelectedArticle(article)}
+                  >
+                    Read More
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-          </div>
-        ))}
+          ))}
+        </div>
+
+        <div className="w-3/12 p-3 bg-black">
+
+        </div>
       </div>
 
       <Transition.Root show={selectedArticle !== null} as={Fragment}>
@@ -126,6 +134,7 @@ const ArticleList: React.FC = () => {
           </div>
         </Dialog>
       </Transition.Root>
+      
     </>
   );
 };

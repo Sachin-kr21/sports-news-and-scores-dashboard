@@ -1,7 +1,7 @@
 // src/pages/members/NewProject.tsx
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import PreferencesPage from "./preferencesPage";
+import PreferencesPage from "./PreferencesPage";
 
 const PreferencesModal = () => {
   const [isOpen, setIsOpen] = useState(false);

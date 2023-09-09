@@ -1,4 +1,6 @@
 import {useState , useEffect} from 'react';
+import { fetchAllMatches } from '../context/matches/action';
+import { useMatchDispatch } from '../context/matches/context';
 
 
 const getStoredValue = <T>(key: string, defaultValue: T): T => {
@@ -16,16 +18,19 @@ const getStoredValue = <T>(key: string, defaultValue: T): T => {
     const [value, setValue] = useState(() => {
       return getStoredValue(key, defaultValue);
     });
+  const dispatch = useMatchDispatch();
+
   
     useEffect(() => {
-      const parsedvalue = JSON.parse(JSON.stringify(value))
+      // const parsedvalue = JSON.parse(JSON.stringify(value))
       // console.log("parsedvalue"+parsedvalue.tasks[0].title);
-      for(let i=0;i<parsedvalue.tasks.length;i++){
-        parsedvalue.tasks[i].id=i;
-      }
+      
+      fetchAllMatches(dispatch);
 
-      localStorage.setItem(key, JSON.stringify(parsedvalue));
-    }, [key, value]);
+      // localStorage.setItem(key, JSON.stringify(parsedvalue));
+    }, [dispatch]);
+
+
   
     return [value, setValue];
   };

@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import { sportsData, teamsData, Sport, Team } from "./data";
 import { API_ENDPOINT } from "../config/constants";
+import { useMatchDispatch } from "../context/matches/context";
+import { fetchAllMatches } from "../context/matches/action";
 
 interface PreferencesPageProps {
   closeModal: () => void;
@@ -9,6 +11,7 @@ interface PreferencesPageProps {
 const PreferencesPage: React.FC<PreferencesPageProps> = ({ closeModal }) => {
   const [selectedSports, setSelectedSports] = useState<Sport[]>([]);
   const [selectedTeams, setSelectedTeams] = useState<Team[]>([]);
+  const dispatch = useMatchDispatch();
 
   const handleSportChange = (sport: Sport) => {
     if (selectedSports.some((item) => item.id === sport.id)) {
@@ -60,10 +63,14 @@ const PreferencesPage: React.FC<PreferencesPageProps> = ({ closeModal }) => {
       if (!response.ok) {
         throw new Error("preferences updation failed");
       }
+      
       const preferences = JSON.stringify(selectedData.preferences);
       localStorage.setItem("userPreferences", preferences);
       console.log("preferences updation successful");
-
+      if(dispatch)
+    fetchAllMatches(dispatch);
+      
+      
       closeModal();
     } catch (error) {
       console.error("preferences updation failed:", error);
@@ -103,6 +110,8 @@ const PreferencesPage: React.FC<PreferencesPageProps> = ({ closeModal }) => {
       const preferences = JSON.stringify(resetData.preferences);
       localStorage.setItem("userPreferences", preferences);
       console.log("preferences reset successful");
+      if(dispatch)
+      fetchAllMatches(dispatch);
 
       closeModal();
     } catch (error) {
@@ -117,7 +126,7 @@ const PreferencesPage: React.FC<PreferencesPageProps> = ({ closeModal }) => {
   //   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 ">
       <h1 className="text-2xl font-bold mb-4">Preferences</h1>
       <div className="mb-4">
         <h2 className="text-lg font-semibold mb-2">Sports</h2>
