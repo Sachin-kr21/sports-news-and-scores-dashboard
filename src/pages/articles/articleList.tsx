@@ -1,51 +1,33 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { API_ENDPOINT } from "../../config/constants";
+// import { API_ENDPOINT } from "../../config/constants";
 import { Dialog, Transition } from "@headlessui/react";
 import ArticleContent from "./articleContent";
-import emptyListGif from "../../emptyListGif.gif"
-interface Article {
-  date: string;
-  id: number;
-  sport: {
-    id: number;
-    name: string;
-  };
-  summary: string;
-  teams: {
-    id: number;
-  }[];
-  thumbnail: string;
-  title: string;
-}
+import emptyListGif from "../../assets/emptyListGif.gif";
+import { Article } from "../../context/articles/types";
+import { fetchAllArticles } from "../../context/articles/action";
+import { useArticleDispatch, useArticleState } from "../../context/articles/context";
+
+
+
 
 const ArticleList: React.FC = () => {
  
-  const [articles, setArticlesData] = useState<Article[]>([]);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
   const [selectedSport, setSelectedSport] = useState<string | null>(null);
 
-  const fetchAllArticles = async () => {
-    try {
-      const response = await fetch(`${API_ENDPOINT}/articles`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
 
-      if (!response.ok) {
-        throw new Error("Articles fetching failed");
-      }
 
-      const articles = await response.json();
-      console.log("All Articles Fetched");
-      setArticlesData(articles);
-    } catch (error) {
-      console.error("Articles fetching failed: ", error);
-    }
-  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { Article }: any = useArticleState() || undefined;
+  const dispatch = useArticleDispatch();
+  const articles = Article;
 
   useEffect(() => {
-    fetchAllArticles();
-  }, []);
+    if (dispatch) {
+      fetchAllArticles(dispatch);
+    }
+  }, [dispatch]);
+
 
   const formatDate = (dateString: string) => {
     const options = { year: "numeric", month: "long", day: "numeric" } as const;
@@ -55,12 +37,13 @@ const ArticleList: React.FC = () => {
   const filterArticlesBySport = (sportName: string | null) => {
     setSelectedSport(sportName);
   };
-
+  // console.log("article",article);
+  
   const filteredArticles = selectedSport
-    ? articles.filter((article) => article.sport.name === selectedSport)
+    ? articles.filter((article: Article) => article.sport.name === selectedSport)
     : articles;
 
-    console.log("filteredArticles",filteredArticles);
+    // console.log("filteredArticles",filteredArticles);
     
   return (
     <>
@@ -68,7 +51,7 @@ const ArticleList: React.FC = () => {
       <div className="flex flex-row w-full bg-white">
         <div className="flex flex-col gap-4 p-3">
           <div className="flex justify-between">
-            <div className="flex justify-between ">
+            <div className="">
             <button
               className={`text-cyan cursor-pointer py-2 px-4 rounded ${
                 selectedSport === null ? "bg-slate-200" : "bg-white"
@@ -133,7 +116,8 @@ const ArticleList: React.FC = () => {
                 <img src={emptyListGif} alt="Empty List" className="pt-60 " />
               </div>
             ) : (
-              filteredArticles.map((article) => (
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              filteredArticles.map((article:any) => (
                 <div key={article.id} className="border rounded p-4 flex bg-slate-100">
                   <div className="w-36 flex justify-center items-center">
                     <img

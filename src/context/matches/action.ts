@@ -44,7 +44,7 @@ export const fetchAllMatches = async (dispatch: MatchDispatch) => {
         }
         else{
           const filteredEvents = filterEvents(data.matches , pref);
-          console.log("filterEvents",filterEvents);
+          // console.log("filterEvents",filterEvents);
           
       dispatch({ type: "FETCH_MATCH_SUCCESS", payload: filteredEvents });
           

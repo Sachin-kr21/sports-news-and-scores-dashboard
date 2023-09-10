@@ -1,4 +1,5 @@
 import Articles from "../articles";
+import Filter from "../filteredArticles";
 import Appbar from "../layouts";
 import Matches from "../matches";
 
@@ -17,8 +18,8 @@ const Dashboard: React.FC = () => {
         <div className="w-8/12">
           <Articles />
         </div>
-        <div className="bg-black flex-1 p">
-         
+        <div className="flex-1">
+         <Filter/>
         </div>
       </div>
     </div> 

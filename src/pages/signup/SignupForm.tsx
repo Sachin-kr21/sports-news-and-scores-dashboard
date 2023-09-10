@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 
-import { API_ENDPOINT } from '../config/constants';
+import { API_ENDPOINT } from '../../config/constants';
 import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -35,7 +35,7 @@ const SignupForm: React.FC = () => {
       // src/pages/signup/SignupForm.tsx
       
       const data = await response.json()
-      console.log(data);
+      // console.log(data);
       
       localStorage.setItem('authToken',data.auth_token);
       localStorage.setItem('userData', JSON.stringify(data.user))

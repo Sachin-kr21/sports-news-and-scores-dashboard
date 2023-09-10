@@ -24,7 +24,6 @@ const MatchItem: React.FC<MatchItemProps> = ({ match , isRunning}) => {
 
   const [matchData, setMatchData] = useState<Match>(match);
 
-    // sessionStorage.setItem("sachin","ruby");
     const fetchMatchData = async () => {
         try {
           const response = await fetch(`${API_ENDPOINT}/matches/${matchData.id}`, {

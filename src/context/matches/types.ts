@@ -1,4 +1,4 @@
-import { Team } from "../../pages/preferences/data";
+import { Team } from "../data";
 
 export interface Match {
     startsAt:string,

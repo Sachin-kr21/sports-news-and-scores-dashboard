@@ -1,8 +1,8 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 import Notfound from "../Notfound";
 import Dashboard from "../pages/dashboard";
-import Signin from "../signin/index";
-import Signup from "../signup/index";
+import Signin from "../pages/signin/index";
+import Signup from "../pages/signup/index";
 import Logout from "../pages/logout/index";
 
 

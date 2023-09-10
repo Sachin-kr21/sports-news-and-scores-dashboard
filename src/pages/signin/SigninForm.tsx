@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 // Dialogue 1: First we will import the API_ENDPOINT constant from the `config` folder
-import { API_ENDPOINT } from '../config/constants';
+import { API_ENDPOINT } from '../../config/constants';
 import {useNavigate} from 'react-router-dom';
 
 import { useForm, SubmitHandler } from "react-hook-form";
