@@ -1,8 +1,8 @@
 import React, {  useState } from "react";
 import { sportsData, teamsData, Sport, Team } from "./data";
-import { API_ENDPOINT } from "../config/constants";
-import { useMatchDispatch } from "../context/matches/context";
-import { fetchAllMatches } from "../context/matches/action";
+import { API_ENDPOINT } from "../../config/constants";
+import { useMatchDispatch } from "../../context/matches/context";
+import { fetchAllMatches } from "../../context/matches/action";
 
 interface PreferencesPageProps {
   closeModal: () => void;

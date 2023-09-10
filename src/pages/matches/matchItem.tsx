@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { API_ENDPOINT } from '../config/constants';
+import { API_ENDPOINT } from '../../config/constants';
 
 interface Match {
   id: number; 
@@ -24,7 +24,7 @@ const MatchItem: React.FC<MatchItemProps> = ({ match , isRunning}) => {
 
   const [matchData, setMatchData] = useState<Match>(match);
 
-  
+    // sessionStorage.setItem("sachin","ruby");
     const fetchMatchData = async () => {
         try {
           const response = await fetch(`${API_ENDPOINT}/matches/${matchData.id}`, {

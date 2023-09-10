@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { API_ENDPOINT } from "../config/constants";
+import { API_ENDPOINT } from "../../config/constants";
 
 interface ArticleDetailsProps {
   articleId: number;

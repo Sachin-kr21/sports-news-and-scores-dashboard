@@ -10,18 +10,18 @@ const Dashboard: React.FC = () => {
           <Appbar/>
           
       </div>
-      <div className="pl-10">
+      <div className="pl-10 pr-20">
         <Matches  />
       </div>
-      <div className="flex pl-10"> 
-        <div>
+      <div className="pl-10 pr-20 flex gap-5">
+        <div className="w-8/12">
           <Articles />
-
         </div>
-          
-        
+        <div className="bg-black flex-1 p">
+         
+        </div>
       </div>
-    </div>        
+    </div> 
     );
   }
 

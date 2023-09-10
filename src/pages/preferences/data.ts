@@ -1,4 +1,4 @@
-import { API_ENDPOINT } from "../config/constants";
+import { API_ENDPOINT } from "../../config/constants";
 
 async function fetchSports() {
   try {

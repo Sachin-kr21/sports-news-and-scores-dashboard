@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import MatchItem from "./matchItem";
-import { Match } from "../context/matches/types";
-import { useMatchDispatch, useMatchState } from "../context/matches/context";
-import { fetchAllMatches } from "../context/matches/action";
+import { Match } from "../../context/matches/types";
+import { useMatchDispatch, useMatchState } from "../../context/matches/context";
+import { fetchAllMatches } from "../../context/matches/action";
 
 const MatchList: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -28,7 +28,7 @@ const MatchList: React.FC = () => {
 
   return (
     <div className="flex items-center bg-blue-100 w-full ">
-      <div className="flex items-center justify-start max-w-full  p-4 pr-20">
+      <div className="flex items-center justify-start max-w-full  p-4 ">
         <div className="flex flex-nowrap overflow-x-scroll p-4 ">
           {sortedMatchData.map((match: Match) => (
             <MatchItem key={match.id} match={match} isRunning={match.isRunning} />

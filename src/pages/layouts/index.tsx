@@ -21,7 +21,7 @@ const classNames = (...classes: string[]): string => classes.filter(Boolean).joi
   return (
     <>
      {/* border-gray-200 dark:bg-gray-900 */}
-<nav className=" w-full bg-blue-400 rounded-lg">
+<nav className=" w-full bg-slate-500 rounded-lg">
     <div className="flex  items-center justify-between max-w-screen p-4 pr-20">
         <a href="/" className="flex items-center">
             {/* <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Dashboard</span> */}
@@ -33,8 +33,10 @@ const classNames = (...classes: string[]): string => classes.filter(Boolean).joi
     <PreferencesModal/>
   )}
         {!auth &&
-        <div className="flex items-center">
-            <a href="/signin" className="text-sm  text-blue-600 dark:text-blue-100 hover:underline">Login</a>
+        <div className="flex items-center gap-5">
+            <a href="/signin" className="text-large  text-white bg-blue-500 p-2  rounded hover:bg-blue-700">Login</a>
+        
+        <a href="/signup" className="text-large  text-white bg-green-600 p-2 rounded hover:bg-green-700">Signup</a>
         </div>
         }
         {auth &&
