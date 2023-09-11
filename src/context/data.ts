@@ -10,8 +10,9 @@ async function fetchSports() {
     if (!response.ok) {
       throw new Error('Fetching sports failed');
     }
-
+    
     const data = await response.json();
+    // console.log("sports",data.sports);
     return data.sports; 
 
   } catch (error) {
@@ -19,6 +20,8 @@ async function fetchSports() {
     return []; 
   }
 }
+
+
 
 export const sportsData: Sport[] = [];
 

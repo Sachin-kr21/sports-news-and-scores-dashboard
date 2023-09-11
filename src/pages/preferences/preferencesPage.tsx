@@ -1,8 +1,10 @@
-import React, {  useState } from "react";
+import React, { useState, useEffect } from "react";
 import { sportsData, teamsData, Sport, Team } from "../../context/data";
 import { API_ENDPOINT } from "../../config/constants";
 import { useMatchDispatch } from "../../context/matches/context";
 import { fetchAllMatches } from "../../context/matches/action";
+import { fetchAllArticles } from "../../context/articles/action";
+import { useArticleDispatch } from "../../context/articles/context";
 
 interface PreferencesPageProps {
   closeModal: () => void;
@@ -12,6 +14,28 @@ const PreferencesPage: React.FC<PreferencesPageProps> = ({ closeModal }) => {
   const [selectedSports, setSelectedSports] = useState<Sport[]>([]);
   const [selectedTeams, setSelectedTeams] = useState<Team[]>([]);
   const dispatch = useMatchDispatch();
+  const dispatchArticles = useArticleDispatch();
+
+  useEffect(() => {
+    const userPreferencesString = localStorage.getItem("userPreferences") || "";
+    const userPreferences = userPreferencesString
+      ? JSON.parse(userPreferencesString)
+      : null;
+
+    if (userPreferences) {
+      setSelectedSports(
+        sportsData.filter((sport) =>
+          userPreferences.interestedGames.includes(sport.name)
+        )
+      );
+
+      setSelectedTeams(
+        teamsData.filter((team) =>
+          userPreferences.interestedTeams.includes(team.name)
+        )
+      );
+    }
+  }, []);
 
   const handleSportChange = (sport: Sport) => {
     if (selectedSports.some((item) => item.id === sport.id)) {
@@ -39,60 +63,47 @@ const PreferencesPage: React.FC<PreferencesPageProps> = ({ closeModal }) => {
         interestedTeams: selectedTeamsNames,
       },
     };
-    
-    // console.log("selectedData",selectedData.preferences.interestedGames.length,selectedData.preferences.interestedTeams.length);
-    
-    // const auth = localStorage.getItem("authToken")
-    // console.log("Selected Data:", JSON.stringify(selectedData, null, 2));
-    if(selectedData.preferences.interestedGames.length==0 && selectedData.preferences.interestedTeams.length==0){
+
+    if (selectedData.preferences.interestedGames.length === 0 && selectedData.preferences.interestedTeams.length === 0) {
       console.log("No Preferences Selected");
       window.alert("No Preferences Selected");
-    }
-    else{
-    const token = localStorage.getItem("authToken") ?? "";
-    try {
-      const response = await fetch(`${API_ENDPOINT}/user/preferences`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(selectedData),
-      });
+    } else {
+      const token = localStorage.getItem("authToken") ?? "";
+      try {
+        const response = await fetch(`${API_ENDPOINT}/user/preferences`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(selectedData),
+        });
 
-      if (!response.ok) {
-        throw new Error("preferences updation failed");
+        if (!response.ok) {
+          throw new Error("preferences updation failed");
+        }
+
+        const preferences = JSON.stringify(selectedData.preferences);
+        localStorage.setItem("userPreferences", preferences);
+        console.log("preferences updation successful");
+        if (dispatch) fetchAllMatches(dispatch);
+        if (dispatchArticles) fetchAllArticles(dispatchArticles);
+
+        closeModal();
+      } catch (error) {
+        console.error("preferences updation failed:", error);
       }
-      
-      const preferences = JSON.stringify(selectedData.preferences);
-      localStorage.setItem("userPreferences", preferences);
-      console.log("preferences updation successful");
-      if(dispatch)
-    fetchAllMatches(dispatch);
-      
-      
-      closeModal();
-    } catch (error) {
-      console.error("preferences updation failed:", error);
     }
-  }
-    // console.log({Sport,Team});
-
-    // console.log('Selected Data:', JSON.stringify(selectedData));
-
-    // console.log('Selected Data:', JSON.stringify(selectedData));
-    // console.log('Selected Teams:', selectedTeams);
   };
 
   const handleReset = async () => {
-
     const resetData = {
       preferences: {
         interestedGames: [],
         interestedTeams: [],
       },
     };
-        
+
     const token = localStorage.getItem("authToken") ?? "";
     try {
       const response = await fetch(`${API_ENDPOINT}/user/preferences`, {
@@ -110,20 +121,14 @@ const PreferencesPage: React.FC<PreferencesPageProps> = ({ closeModal }) => {
       const preferences = JSON.stringify(resetData.preferences);
       localStorage.setItem("userPreferences", preferences);
       console.log("preferences reset successful");
-      if(dispatch)
-      fetchAllMatches(dispatch);
+      if (dispatch) fetchAllMatches(dispatch);
+      if (dispatchArticles) fetchAllArticles(dispatchArticles);
 
       closeModal();
     } catch (error) {
       console.error("preferences reset failed:", error);
     }
-    
   };
-
-  // const handleReset = async () => {
-  //   console.log("selectedData",selectedData);
-    
-  //   };
 
   return (
     <div className="p-6 ">
@@ -157,18 +162,18 @@ const PreferencesPage: React.FC<PreferencesPageProps> = ({ closeModal }) => {
         ))}
       </div>
       <div className="flex space-x-4">
-      <button
-        className="mt-4 py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white rounded-md"
-        onClick={handleSave}
-      >
-        Save
-      </button>
-      <button
-        className="mt-4 py-2 px-4 bg-red-500 hover:bg-red-900 text-white rounded-md   "
-        onClick={handleReset}
-      >
-        Reset
-      </button>
+        <button
+          className="mt-4 py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white rounded-md"
+          onClick={handleSave}
+        >
+          Save
+        </button>
+        <button
+          className="mt-4 py-2 px-4 bg-red-500 hover:bg-red-900 text-white rounded-md   "
+          onClick={handleReset}
+        >
+          Reset
+        </button>
       </div>
     </div>
   );
