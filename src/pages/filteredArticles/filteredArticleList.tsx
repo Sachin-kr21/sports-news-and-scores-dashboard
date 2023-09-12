@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Article } from "../../context/articles/types";
 import { fetchAllArticles } from "../../context/articles/action";
 import { useArticleDispatch, useArticleState } from "../../context/articles/context";
-import emptyListGif from "../../assets/emptyListGif.gif";
+// import emptyListGif from "../../assets/emptyListGif.gif";
 import Select from "react-select";
 import { teamsData } from "../../context/data";
 import { Dialog, Transition } from "@headlessui/react";
@@ -97,7 +97,7 @@ const FilteredArticleList: React.FC = () => {
           <div className="">
             {filteredTeamArticles.length === 0 ? (
               <div className="flex items-center justify-center">
-                <img src={emptyListGif} alt="Empty List" className="pt-60 " />
+                {/* <img src={emptyListGif} alt="Empty List" className="pt-60 " /> */}
               </div>
             ) : (
               // eslint-disable-next-line @typescript-eslint/no-explicit-any

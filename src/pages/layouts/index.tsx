@@ -11,7 +11,7 @@ const Appbar = () => {
     const auth = localStorage.getItem("authToken")
 
     const userNavigation = [
-        { name: 'Profile', href: '#' },
+        { name: 'Profile', href: '/profile' },
         { name: 'Sign out', href: '/logout' },
       ]
 

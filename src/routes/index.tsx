@@ -4,6 +4,8 @@ import Dashboard from "../pages/dashboard";
 import Signin from "../pages/signin/index";
 import Signup from "../pages/signup/index";
 import Logout from "../pages/logout/index";
+import Profile from "../pages/profile";
+import ProtectedRoute, { InAccessableRoutes } from "./protectedRoute";
 
 
 const router = createBrowserRouter([
@@ -17,15 +19,34 @@ const router = createBrowserRouter([
     },
     {
         path: "/signin",
-        element: (<Signin/>)
+        element: (
+        <InAccessableRoutes>
+
+          <Signin/>
+        </InAccessableRoutes>
+        )
     },
     {
         path: "/signup",
-        element: (<Signup/>)
+        element: (
+          <InAccessableRoutes>
+        
+        <Signup/>
+        </InAccessableRoutes>
+        )
     },
     { 
         path: "/logout", 
         element: <Logout /> 
+      },
+      {
+        path: "/profile",
+        element: (
+        <ProtectedRoute>
+        <Profile />
+        </ProtectedRoute>
+        
+        )
       },
   {
     path: "*",

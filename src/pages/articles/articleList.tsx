@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import ArticleContent from "./articleContent";
-import emptyListGif from "../../assets/emptyListGif.gif";
+// import emptyListGif from "../../assets/emptyListGif.gif";
 import { Article } from "../../context/articles/types";
 import { fetchAllArticles } from "../../context/articles/action";
 import { useArticleDispatch, useArticleState } from "../../context/articles/context";
@@ -154,7 +154,7 @@ const ArticleList: React.FC = () => {
           <div className="">
             {filteredArticles.length === 0 ? (
               <div className="flex items-center justify-center">
-                <img src={emptyListGif} alt="Empty List" className="pt-60 " />
+                {/* <img src={emptyListGif} alt="Empty List" className="pt-60 " /> */}
               </div>
             ) : (
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
