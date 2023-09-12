@@ -98,7 +98,7 @@ const ProfilePage: React.FC = () => {
           
           <div >
 
-            <p className="font-bold">
+            <p className="font-bold font-3xl">
               Name: <span>{userData.name}</span>
             </p>
             <p className="font-bold">
@@ -110,7 +110,7 @@ const ProfilePage: React.FC = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
         <label className="block text-gray-700 font-semibold mb-2">Current Password:</label>
-        <input type="text" 
+        <input type="password" 
         id="text"
         placeholder='Current Password...'
         autoFocus
@@ -119,7 +119,7 @@ const ProfilePage: React.FC = () => {
       </div>
       <div>
         <label className="block text-gray-700 font-semibold mb-2">New Password:</label>
-        <input type="text" 
+        <input type="password" 
         id="text"
         placeholder='New Password...'
         autoFocus
