@@ -8,7 +8,7 @@ const Articles : React.FC = () => {
         <>
         <div className="w-full ">
         <h1 className="space-x-4 flex justify-between  max-w-screen-xl p-5 font-bold bg-slate-400 rounded  ">
-        Live news 
+        Trending News
         </h1>
         <ArticleList/>
         

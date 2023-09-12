@@ -48,6 +48,7 @@ const MatchItem: React.FC<MatchItemProps> = ({ match , isRunning}) => {
         }
       };
       
+      const bgColorClass = isRunning ? "bg-white" : "bg-gray-300";
 
     useEffect(() => {
         fetchMatchData(); 
@@ -58,7 +59,7 @@ const MatchItem: React.FC<MatchItemProps> = ({ match , isRunning}) => {
   return (
     <div
       key={match.id}
-      className="bg-white rounded-md p-4 shadow-md border border-gray-500 mx-2 relative"
+      className={`rounded-md p-4 shadow-md border border-gray-500 mx-2 relative ${bgColorClass}`}
       style={{ width: "50%", minWidth: "200px", maxWidth: "400px" }}
     >
       <div className="absolute top-2 right-2">
