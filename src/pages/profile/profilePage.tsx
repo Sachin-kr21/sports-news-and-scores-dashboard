@@ -90,11 +90,11 @@ const ProfilePage: React.FC = () => {
   //   fetchUserData();
   // }, []);
 
-  const [userInfo , setUserInfo] = useState<User>(JSON.parse(localStorage.getItem("userData") || ""));
-  const [preferences , setUserPreferences] = useState<UserPreferences>(JSON.parse(localStorage.getItem("userPreferences") || ""));
+  const userInfo = JSON.parse(localStorage.getItem("userData") || "") as User;
+  const preferences = JSON.parse(localStorage.getItem("userPreferences") || "") as UserPreferences;
   
-  setUserInfo(JSON.parse(localStorage.getItem("userData") || ""))
-  setUserPreferences(JSON.parse(localStorage.getItem("userPreferences") || ""))  
+  // setUserInfo(JSON.parse(localStorage.getItem("userData") || ""))
+  // setUserPreferences(JSON.parse(localStorage.getItem("userPreferences") || ""))  
 
   return (
     <div className=" min-h-screen p-4">
