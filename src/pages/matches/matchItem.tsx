@@ -25,6 +25,7 @@ const MatchItem: React.FC<MatchItemProps> = ({ match , isRunning}) => {
   const [matchData, setMatchData] = useState<Match>(match);
 
     const fetchMatchData = async () => {
+      
         try {
           const response = await fetch(`${API_ENDPOINT}/matches/${matchData.id}`, {
             method: "GET",
@@ -72,6 +73,7 @@ const MatchItem: React.FC<MatchItemProps> = ({ match , isRunning}) => {
                   stroke="currentColor"
                   className="w-6 h-6 text-blue-500 cursor-pointer"
                   onClick={() => fetchMatchData()}
+                  // spin={360}
                 >
                   <path
                     strokeLinecap="round"

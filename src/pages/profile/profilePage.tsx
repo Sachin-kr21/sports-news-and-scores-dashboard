@@ -29,6 +29,7 @@ const ProfilePage: React.FC = () => {
   // const [userData, setUserData] = useState<User>();
   const { register , handleSubmit } = useForm<Inputs>();
   const [passwordUpdated, setPasswordUpdated] = useState(false); 
+  const [passwordError, setPasswordError] = useState(false); 
 
   const onSubmit : SubmitHandler<Inputs> = async (data) => {
     const {current_password,new_password} = data;
@@ -54,6 +55,9 @@ const ProfilePage: React.FC = () => {
 
     } catch (error) {
       console.error('Password updation failed:', error);
+      setPasswordError(true); 
+      setIsShown(!isShown);
+      
     }
   };
 
@@ -152,9 +156,15 @@ const ProfilePage: React.FC = () => {
           Password updated successfully!
         </div>
       )}
-            <p className="font-bold mt-2">Interested Games:</p>
+      {passwordError && (
+        <div className="bg-red-300 p-4 m-4 rounded">
+          Password Incorrect!
+        </div>
+      )}
+      
+            {preferences && <div><p className="font-bold mt-2">Interested Games:</p>
             <ul>
-              {preferences.interestedGames.map((game, index) => (
+              {preferences.interestedGames && preferences.interestedGames.map((game, index) => (
                 <li key={index} className="list-disc ml-4">
                   {game}
                 </li>
@@ -162,12 +172,12 @@ const ProfilePage: React.FC = () => {
             </ul>
             <p className="font-bold mt-2">Interested Teams:</p>
             <ul>
-              {preferences.interestedTeams.map((team, index) => (
+              {preferences.interestedTeams && preferences.interestedTeams.map((team, index) => (
                 <li key={index} className="list-disc ml-4">
                   {team}
                 </li>
               ))}
-            </ul>
+            </ul></div>}
           </div>
         )}
       
