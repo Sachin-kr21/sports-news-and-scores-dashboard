@@ -40,7 +40,7 @@ export const fetchAllMatches = async (dispatch: MatchDispatch) => {
       const pref = localStorage.getItem("userPreferences") || "";
         console.log("hello" , pref.length);
         
-        if(pref.length==2 || pref.length==43 ){
+        if(pref.length==2 || pref.length==43 || pref.length==0){
           
             dispatch({ type: "FETCH_MATCH_SUCCESS", payload: data.matches });
           console.log(1);
