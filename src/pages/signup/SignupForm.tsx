@@ -45,7 +45,7 @@ const SignupForm: React.FC = () => {
         
         // Redirect users to account path after signup
         navigate("/dashboard")
-        // window.location.reload()
+        window.location.reload()
 
     } catch (error) {
       console.error('Sign-up failed:', error);

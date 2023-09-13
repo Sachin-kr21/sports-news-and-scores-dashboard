@@ -17,6 +17,7 @@ export const fetchAllMatches = async (dispatch: MatchDispatch) => {
       return sportMatches || teamMatches;
     });
   };
+// console.log(4);
 
     try {
     dispatch({ type: "FETCH_MATCH_REQUEST" });
@@ -33,18 +34,23 @@ export const fetchAllMatches = async (dispatch: MatchDispatch) => {
       const data = await response.json();
       console.log("All Matches Fetched");
 
-
+      // console.log("data",data);
+      
       if(auth){ 
       const pref = localStorage.getItem("userPreferences") || "";
-
-        if(pref.length==2 || pref.length==43){
+        console.log("hello" , pref.length);
+        
+        if(pref.length==2 || pref.length==43 || pref.length==0){
           
             dispatch({ type: "FETCH_MATCH_SUCCESS", payload: data.matches });
-      
+          console.log(1);
+          
         }
         else{
+          console.log(2);
           const filteredEvents = filterEvents(data.matches , pref);
-          // console.log("filterEvents",filterEvents);
+          console.log("filterEvents",filterEvents);
+
           
       dispatch({ type: "FETCH_MATCH_SUCCESS", payload: filteredEvents });
           
@@ -55,6 +61,7 @@ export const fetchAllMatches = async (dispatch: MatchDispatch) => {
       else{
         
       dispatch({ type: "FETCH_MATCH_SUCCESS", payload: data.matches });
+      console.log(3);
         
       }
 

@@ -6,16 +6,17 @@ import { fetchAllMatches } from "../../context/matches/action";
 
 const MatchList: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { Match }: any = useMatchState();
   const dispatch = useMatchDispatch();
   const matchData = Match;
-
   useEffect(() => {
     if (dispatch) {
       fetchAllMatches(dispatch);
     }
   }, [dispatch]);
-
+  
   const sortedMatchData = matchData.slice().sort((a: Match, b: Match) => {
     if (a.isRunning && !b.isRunning) {
       return -1; 
@@ -26,6 +27,8 @@ const MatchList: React.FC = () => {
     }
   });
 
+  console.log("sortedMatchData",sortedMatchData);
+  
   return (
     <div className="flex items-center bg-blue-100 w-full ">
       <div className="flex items-center justify-start max-w-full  p-4 ">
