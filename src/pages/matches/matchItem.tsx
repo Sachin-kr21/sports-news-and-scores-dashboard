@@ -23,9 +23,10 @@ interface MatchItemProps {
 const MatchItem: React.FC<MatchItemProps> = ({ match , isRunning}) => {
 
   const [matchData, setMatchData] = useState<Match>(match);
+  const [rotationAngle, setRotationAngle] = useState(0);
 
     const fetchMatchData = async () => {
-      
+      setRotationAngle(rotationAngle + 360); 
         try {
           const response = await fetch(`${API_ENDPOINT}/matches/${matchData.id}`, {
             method: "GET",
@@ -71,7 +72,7 @@ const MatchItem: React.FC<MatchItemProps> = ({ match , isRunning}) => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="w-6 h-6 text-blue-500 cursor-pointer"
+                  className={`w-6 h-6 text-blue-500 cursor-pointer transition-transform duration-300 transform rotate-${rotationAngle}`}
                   onClick={() => fetchMatchData()}
                   // spin={360}
                 >

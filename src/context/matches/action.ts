@@ -8,6 +8,8 @@ export const fetchAllMatches = async (dispatch: MatchDispatch) => {
 
  const filterEvents = (events: Match[] , pref : string ) => {
     const userPreferences = JSON.parse(pref) 
+    // console.log("userPreferences",userPreferences.preferredTeams);
+    
     return events.filter((event) => {
       const sportMatches = userPreferences.interestedGames.includes(event.sportName);
       const teamMatches = event.teams.some((team) =>
@@ -38,18 +40,18 @@ export const fetchAllMatches = async (dispatch: MatchDispatch) => {
       
       if(auth){ 
       const pref = localStorage.getItem("userPreferences") || "";
-        console.log("hello" , pref.length);
+        // console.log("hello" , pref.length);
         
         if(pref.length==2 || pref.length==43 || pref.length==0){
           
             dispatch({ type: "FETCH_MATCH_SUCCESS", payload: data.matches });
-          console.log(1);
+          // console.log(1);
           
         }
         else{
-          console.log(2);
+          // console.log(2,pref);
           const filteredEvents = filterEvents(data.matches , pref);
-          console.log("filterEvents",filterEvents);
+          // console.log("filterEvents",filterEvents);
 
           
       dispatch({ type: "FETCH_MATCH_SUCCESS", payload: filteredEvents });
@@ -61,7 +63,7 @@ export const fetchAllMatches = async (dispatch: MatchDispatch) => {
       else{
         
       dispatch({ type: "FETCH_MATCH_SUCCESS", payload: data.matches });
-      console.log(3);
+      // console.log(3);
         
       }
 

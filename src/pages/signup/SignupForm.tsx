@@ -39,6 +39,7 @@ const SignupForm: React.FC = () => {
       
       localStorage.setItem('authToken',data.auth_token);
       localStorage.setItem('userData', JSON.stringify(data.user))
+      localStorage.setItem('userPreferences', "")
       try {
         // ...
         // ...

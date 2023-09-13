@@ -27,7 +27,7 @@ const MatchList: React.FC = () => {
     }
   });
 
-  console.log("sortedMatchData",sortedMatchData);
+  // console.log("sortedMatchData",sortedMatchData);
   
   return (
     <div className="flex items-center bg-blue-100 w-full ">

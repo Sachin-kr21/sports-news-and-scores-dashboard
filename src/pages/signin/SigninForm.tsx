@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react';
+import React, { useState } from 'react';
 // Dialogue 1: First we will import the API_ENDPOINT constant from the `config` folder
 import { API_ENDPOINT } from '../../config/constants';
 import {useNavigate} from 'react-router-dom';
@@ -7,6 +7,7 @@ import {useNavigate} from 'react-router-dom';
 import { useForm, SubmitHandler } from "react-hook-form";
 
 const SigninForm: React.FC = () => {
+  const [passwordError, setPasswordError] = useState(false); 
 
   type Inputs = {
     email : string,
@@ -37,6 +38,8 @@ const SigninForm: React.FC = () => {
       // console.log(data);
       localStorage.setItem('authToken',data.auth_token);
       localStorage.setItem('userData', JSON.stringify(data.user));
+      // console.log("data.user.preferences",data);
+      
       localStorage.setItem('userPreferences' , JSON.stringify(data.user.preferences))
       try {
         // ...
@@ -48,6 +51,8 @@ const SigninForm: React.FC = () => {
 
     } catch (error) {
       console.error('Sign-in failed:', error);
+      setPasswordError(true); 
+
     }
       // Dialogue: After successful signin we have to redirect the user to the secured page. We will do that later.
 
@@ -80,7 +85,11 @@ const SigninForm: React.FC = () => {
       </div>
       <button type="submit" id="submit" className="w-full bg-blue-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-gray mt-4">Sign In</button>
       <button onClick={()=>navigate('/signup')} className="w-full bg-green-700 hover:bg-green-900 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-gray mt-4">Sign Up</button>
-      
+      {passwordError && (
+        <div className="bg-red-300">
+          Password Incorrect!
+        </div>
+      )}
     </form>
   );
 };
