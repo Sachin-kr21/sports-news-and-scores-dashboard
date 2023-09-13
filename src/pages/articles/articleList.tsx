@@ -65,6 +65,10 @@ const ArticleList: React.FC = () => {
     setSelectedSport(sportName);
   };
 
+
+
+  
+
   return (
     <>
       <div className="flex flex-row w-full bg-white">
@@ -164,12 +168,16 @@ const ArticleList: React.FC = () => {
                     <img
                       src={article.thumbnail}
                       alt="Article Thumbnail"
-                      className="h-20 rounded mr-4"
+                      className="h-20 rounded mr-4 "
                     />
                   </div>
                   <div className="w-5/6">
+                    <div className="flex justify-between">
                     <h2 className="text-lg font-semibold">{article.title}</h2>
+                    
+                    </div>
                     <p className="text-sm text-gray-600 w-9/10">{article.summary}</p>
+
                     <div className="flex justify-between">
                       <div className="text-gray-500">{formatDate(article.date)}</div>
                       <button
