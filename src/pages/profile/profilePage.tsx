@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { API_ENDPOINT } from "../../config/constants";
 import emptyListGif from "../../assets/emptyListGif.gif";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -20,8 +20,13 @@ const ProfilePage: React.FC = () => {
     new_password : string
   };
 
+  interface UserPreferences {
+    interestedGames: string[];
+    interestedTeams: string[];
+  }
+  
   const token = localStorage.getItem("authToken") ?? "";
-  const [userData, setUserData] = useState<User>();
+  // const [userData, setUserData] = useState<User>();
   const { register , handleSubmit } = useForm<Inputs>();
   const [passwordUpdated, setPasswordUpdated] = useState(false); 
 
@@ -52,27 +57,27 @@ const ProfilePage: React.FC = () => {
     }
   };
 
-  async function fetchUserData() {
-    try {
-      const response = await fetch(`${API_ENDPOINT}/user`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+  // async function fetchUserData() {
+  //   try {
+  //     const response = await fetch(`${API_ENDPOINT}/user`, {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
 
-      if (!response.ok) {
-        throw new Error("Fetching user details failed");
-      }
+  //     if (!response.ok) {
+  //       throw new Error("Fetching user details failed");
+  //     }
 
-      const data = await response.json();
-      setUserData(data);
-    } catch (error) {
+  //     const data = await response.json();
+  //     // setUserData(data);
+  //   } catch (error) {
      
-        console.error("Fetching user details failed:", error);
-    }
-  }
+  //       console.error("Fetching user details failed:", error);
+  //   }
+  // }
 
   const [isShown, setIsShown] = useState(false);
 
@@ -81,9 +86,15 @@ const ProfilePage: React.FC = () => {
 
   };
 
-  useEffect(() => {
-    fetchUserData();
-  }, []);
+  // useEffect(() => {
+  //   fetchUserData();
+  // }, []);
+
+  const [userInfo , setUserInfo] = useState<User>(JSON.parse(localStorage.getItem("userData") || ""));
+  const [preferences , setUserPreferences] = useState<UserPreferences>(JSON.parse(localStorage.getItem("userPreferences") || ""));
+  
+  setUserInfo(JSON.parse(localStorage.getItem("userData") || ""))
+  setUserPreferences(JSON.parse(localStorage.getItem("userPreferences") || ""))  
 
   return (
     <div className=" min-h-screen p-4">
@@ -94,15 +105,15 @@ const ProfilePage: React.FC = () => {
         
       <div className="mt-4 bg-white p-4 rounded shadow flex justify-between">
 
-        {userData && (
+        {userInfo && (
           
           <div >
 
             <p className="font-bold font-3xl">
-              Name: <span>{userData.name}</span>
+              Name: <span>{userInfo.name}</span>
             </p>
             <p className="font-bold">
-              Email: <span className="font-normal">{userData.email}</span>
+              Email: <span className="font-normal">{userInfo.email}</span>
             </p>
             <button onClick={passwordInputField} className="text-blue-500">Update Password</button>
             {isShown && 
@@ -143,7 +154,7 @@ const ProfilePage: React.FC = () => {
       )}
             <p className="font-bold mt-2">Interested Games:</p>
             <ul>
-              {userData.preferences.interestedGames.map((game, index) => (
+              {preferences.interestedGames.map((game, index) => (
                 <li key={index} className="list-disc ml-4">
                   {game}
                 </li>
@@ -151,7 +162,7 @@ const ProfilePage: React.FC = () => {
             </ul>
             <p className="font-bold mt-2">Interested Teams:</p>
             <ul>
-              {userData.preferences.interestedTeams.map((team, index) => (
+              {preferences.interestedTeams.map((team, index) => (
                 <li key={index} className="list-disc ml-4">
                   {team}
                 </li>
