@@ -5,14 +5,16 @@ import { UserCircleIcon } from '@heroicons/react/24/outline'
 // import SettingsIcon from './settingsIcon';
 // import PreferencesIcon from './preferencesIcon';
 import PreferencesModal from '../preferences/preferencesModal';
+import LanguageSelector from '../i18n-l10n/language-selector';
+import { useTranslation } from 'react-i18next';
 
 
 const Appbar = () => {
     const auth = localStorage.getItem("authToken")
-
+    const { t } = useTranslation()
     const userNavigation = [
-        { name: 'Profile', href: '/profile' },
-        { name: 'Sign out', href: '/logout' },
+        { name:  t('Profile'), href: '/profile' },
+        { name: t('Sign out'), href: '/logout' },
       ]
 
 const classNames = (...classes: string[]): string => classes.filter(Boolean).join(' ');
@@ -25,8 +27,9 @@ const classNames = (...classes: string[]): string => classes.filter(Boolean).joi
         <a href="/" className="flex items-center">
             <img src='../sports tracker logo.svg' className="h-12 mr-3 pl-10" alt="Sports Tracker" />
         </a>
-
         <div className="flex items-center">
+        <LanguageSelector/>
+
         {auth && (
     <PreferencesModal/>
   )}
@@ -37,6 +40,7 @@ const classNames = (...classes: string[]): string => classes.filter(Boolean).joi
         <a href="/signup" className="text-large  text-white bg-green-600 p-2 rounded hover:bg-green-700">Signup</a>
         </div>
         }
+        
         {auth &&
         <div>
 

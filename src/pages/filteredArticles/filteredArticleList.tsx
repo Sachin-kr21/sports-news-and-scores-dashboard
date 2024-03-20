@@ -7,18 +7,19 @@ import Select from "react-select";
 import { teamsData } from "../../context/data";
 import { Dialog, Transition } from "@headlessui/react";
 import ArticleContent from "../articles/articleContent";
+import { useTranslation } from "react-i18next";
 
 
 const FilteredArticleList: React.FC = () => {
   const [selectedSport, setSelectedSport] = useState<string | null>(null);
   const [selectedTeams, setSelectedTeams] = useState<string[]>([]);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
-
+  const { i18n , t} = useTranslation()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { Article }: any = useArticleState() || undefined;
   const dispatch = useArticleDispatch();
   const articles = Article;
-
+  
   useEffect(() => {
     if (dispatch) {
       fetchAllArticles(dispatch);
@@ -30,9 +31,16 @@ const FilteredArticleList: React.FC = () => {
   //   label: string;
   // };
   
-  const formatDate = (dateString: string) => {
+  const formatedDate = (dateString: string) => {
     const options = { year: "numeric", month: "long", day: "numeric" } as const;
-    return new Date(dateString).toLocaleDateString("en-US", options);
+    return new Date(dateString).toLocaleDateString(i18n.language, options);
+        // return new Intl.DateTimeFormat(i18n.language).format(new Date(localDate));
+
+    // const date = new Date(dateString);
+    // console.log("date " ,dateString);
+    
+    // return new Intl.DateTimeFormat(i18n.language).format(date);
+    
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -49,11 +57,11 @@ const FilteredArticleList: React.FC = () => {
     : articles;
 
     const sportOptions = [
-      { value: null, label: "All Sports" },
+      { value: null, label: t("All Sports") },
       ...teamsData
         .map((team) => team.plays)
         .filter((value, index, self) => self.indexOf(value) === index) 
-        .map((sport) => ({ value: sport, label: sport })),
+        .map((sport) => ({ value: sport, label: t(sport) })),
     ];
 
     const teamOptions = selectedSport
@@ -70,9 +78,9 @@ const FilteredArticleList: React.FC = () => {
       <div className="flex flex-row w-full bg-white rounded">
         <div className="flex flex-col gap-4 p-3">
           <div className="flex gap-5">
-            <h1 className="text-xl pl-4 font-bold text-gray-800 pt-1">Filter</h1>
+            <h1 className="text-xl pl-4 font-bold text-gray-800 pt-1">{t("Filter")}</h1>
             <Select
-              placeholder="Select Sport..."
+              placeholder={t("Select Sport") + "..."}
               className="w-full"
               options={sportOptions}
               value={sportOptions.find((option) => option.value === selectedSport)}
@@ -82,9 +90,9 @@ const FilteredArticleList: React.FC = () => {
           </div>
           {selectedSport && (
             <div className="flex gap-5">
-              <h1 className="text-xl pl-4 font-bold text-gray-800 pt-1">Teams</h1>
+              <h1 className="text-xl pl-4 font-bold text-gray-800 pt-1">{t("Teams")}</h1>
               <Select
-                placeholder="Select Teams..."
+                placeholder={t("Select Teams") + "..."}
                 className="w-full"
                 isMulti
                 options={teamOptions}
@@ -110,12 +118,12 @@ const FilteredArticleList: React.FC = () => {
                     <h2 className="text-lg font-semibold">{article.title}</h2>
                     <p className="text-sm text-gray-600 w-9/10">{article.summary}</p>
                     <div className="flex justify-between">
-                      <div className="text-gray-500">{formatDate(article.date)}</div>
+                      <div className="text-gray-500">{formatedDate(article.date)}</div>
                       <button
                         className="text-blue-500 cursor-pointer pb-5"
                         onClick={() => setSelectedArticle(article)}
                       >
-                        Read More
+                        {t("Read More")}
                       </button>
                     </div>
                   </div>
@@ -163,7 +171,7 @@ const FilteredArticleList: React.FC = () => {
                   {selectedArticle?.title}
                   <br />
                   <div className="font-light">
-                  {formatDate(selectedArticle?.date || "")}
+                  {formatedDate(selectedArticle?.date || "")}
                   </div>
                   </div>
                   <ArticleContent articleId={selectedArticle?.id || 0} />

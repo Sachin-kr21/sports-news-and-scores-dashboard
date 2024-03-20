@@ -5,17 +5,18 @@ import ArticleContent from "./articleContent";
 import { Article } from "../../context/articles/types";
 import { fetchAllArticles } from "../../context/articles/action";
 import { useArticleDispatch, useArticleState } from "../../context/articles/context";
+import { useTranslation } from "react-i18next";
 
 const ArticleList: React.FC = () => {
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
   const [selectedSport, setSelectedSport] = useState<string | null>(null);
   const auth = localStorage.getItem("authToken");
-
+  const { t , i18n } = useTranslation();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { Article }: any = useArticleState() || undefined;
   const dispatch = useArticleDispatch();
   const articles = Article;
-
+  
   useEffect(() => {
     if (dispatch) {
       fetchAllArticles(dispatch);
@@ -27,9 +28,20 @@ const ArticleList: React.FC = () => {
   const sportsPreferences = userPreferences?.interestedGames || []; 
 
   const formatDate = (dateString: string) => {
+    
     const options = { year: "numeric", month: "long", day: "numeric" } as const;
-    return new Date(dateString).toLocaleDateString("en-US", options);
+    return new Date(dateString).toLocaleDateString(i18n.language, options);
+    
+    // return new Intl.DateTimeFormat(i18n.language).format(date);
+    
   };
+
+  // const formatDate = (dateString: string) => {
+    // console.log(dateString);
+    
+  //   const options = { year: "numeric", month: "long", day: "numeric" } as const;
+  //   return new Date(dateString).toLocaleDateString("en-US", options);
+  // };
 
   const shouldShowPreferences = auth !== null;
   const shouldShowsportsPreferences = sportsPreferences.length;
@@ -83,7 +95,7 @@ const ArticleList: React.FC = () => {
                     }`}
                     onClick={() => filterArticlesBySport("Preferences")}
                   >
-                    My Interests
+                   {t("My Interests")}
                   </button>
                   <button
                     className={`text-cyan cursor-pointer py-2 px-4 rounded ${
@@ -91,7 +103,7 @@ const ArticleList: React.FC = () => {
                     }`}
                     onClick={() => filterArticlesBySport(null)}
                   >
-                    All Sports
+                    {t("All Sports")}
                   </button>
                 </div>
               )}
@@ -102,7 +114,7 @@ const ArticleList: React.FC = () => {
                   }`}
                   onClick={() => filterArticlesBySport(null)}
                 >
-                  All Sports
+                  {t("All Sports")}
                 </button>
               )}
               <button
@@ -111,7 +123,7 @@ const ArticleList: React.FC = () => {
                 }`}
                 onClick={() => filterArticlesBySport("American Football")}
               >
-                American Football
+                {t("American Football")}
               </button>
               <button
                 className={`text-cyan cursor-pointer py-2 px-4 rounded ${
@@ -119,7 +131,7 @@ const ArticleList: React.FC = () => {
                 }`}
                 onClick={() => filterArticlesBySport("Basketball")}
               >
-                Basketball
+                {t("Basketball")}
               </button>
               <button
                 className={`text-cyan cursor-pointer py-2 px-4 rounded ${
@@ -127,7 +139,7 @@ const ArticleList: React.FC = () => {
                 }`}
                 onClick={() => filterArticlesBySport("Rugby")}
               >
-                Rugby
+                {t("Rugby")}
               </button>
               <button
                 className={`text-cyan cursor-pointer py-2 px-4 rounded ${
@@ -135,7 +147,7 @@ const ArticleList: React.FC = () => {
                 }`}
                 onClick={() => filterArticlesBySport("Field Hockey")}
               >
-                Field Hockey
+                {t("Field Hockey")}
               </button>
               <button
                 className={`text-cyan cursor-pointer py-2 px-4 rounded ${
@@ -143,7 +155,7 @@ const ArticleList: React.FC = () => {
                 }`}
                 onClick={() => filterArticlesBySport("Table Tennis")}
               >
-                Table Tennis
+                {t("Table Tennis")}
               </button>
               <button
                 className={`text-cyan cursor-pointer py-2 px-4 rounded ${
@@ -151,7 +163,7 @@ const ArticleList: React.FC = () => {
                 }`}
                 onClick={() => filterArticlesBySport("Cricket")}
               >
-                Cricket
+                {t("Cricket")}
               </button>
             </div>
           </div>
@@ -184,7 +196,7 @@ const ArticleList: React.FC = () => {
                         className="text-blue-500 cursor-pointer pb-5"
                         onClick={() => setSelectedArticle(article)}
                       >
-                        Read More
+                        {t("Read More")}
                       </button>
                     </div>
                   </div>

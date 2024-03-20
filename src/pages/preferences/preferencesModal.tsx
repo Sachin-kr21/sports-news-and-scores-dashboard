@@ -1,10 +1,11 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import PreferencesPage from "./preferencesPage";
+import { useTranslation } from "react-i18next";
 
 const PreferencesModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const {t} = useTranslation()
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -67,7 +68,7 @@ const PreferencesModal = () => {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Add Preferences
+                    {t("Add Preferences")}
                   </Dialog.Title>
                   <div className="mt-2">
                     <PreferencesPage closeModal={closeModal} />

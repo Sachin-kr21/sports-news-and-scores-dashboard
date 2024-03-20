@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { API_ENDPOINT } from '../../config/constants';
+import { useTranslation } from 'react-i18next';
 
 interface Match {
   id: number; 
@@ -21,6 +22,7 @@ interface MatchItemProps {
 
 
 const MatchItem: React.FC<MatchItemProps> = ({ match , isRunning}) => {
+  const { t } = useTranslation()
 
   const [matchData, setMatchData] = useState<Match>(match);
   const [rotationAngle, setRotationAngle] = useState<number>(0);
@@ -75,22 +77,20 @@ const MatchItem: React.FC<MatchItemProps> = ({ match , isRunning}) => {
   return (
     <div
       key={match.id}
-      className={`rounded-md p-4 shadow-md border border-gray-500 mx-2 relative ${bgColorClass}`}
+      className={`rounded-md p-4 shadow-md border border-gray-500 mx-2 ${bgColorClass}`}
       style={{ width: "50%", minWidth: "200px", maxWidth: "400px" }}
     >
       <div className="absolute top-2 right-2">
         {isRunning &&
       <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className={`w-6 h-6 text-blue-500 cursor-pointer transition-transform duration-300 transform rotate-${rotationAngle}`}
-                  onClick={() => onCLickEvent()}
-                  // transform={`rotate-${rotationAngle}`}
-                  // spin={360}
-                >
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className={`w-6 h-6 text-blue-500 cursor-pointer transition-transform duration-300 transform rotate-${rotationAngle}`}
+      onClick={() => onCLickEvent()}
+    >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -98,12 +98,12 @@ const MatchItem: React.FC<MatchItemProps> = ({ match , isRunning}) => {
                   />
                 </svg>}
       </div>
-      <h3 className="font-semibold text-sm mb-1">{matchData.sportName}</h3>
+      <h3 className="font-semibold text-sm mb-1">{t(matchData.sportName)}</h3>
       <p className="text-gray-600 text-xs mb-2">{matchData.location}</p>
 
       <div>
         {matchData.teams.map((team, index) => (
-          <p key={index} className="text-gray-600 text-sm flex justify-between">
+          <p key={index} className="text-gray-600 text-sm flex justify-between ">
             {team.name}
 
             <span className=''>{matchData.score !== undefined ? matchData.score[team.name] : ""}</span>
